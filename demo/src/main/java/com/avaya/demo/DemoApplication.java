@@ -6,9 +6,13 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@EnableCaching
 @SpringBootApplication
 @RestController
 public class DemoApplication extends SpringBootServletInitializer{
+	
+	@Autowired
+	private DemoService demoService;
 	
 	@RequestMapping("/")
     public String home() {
