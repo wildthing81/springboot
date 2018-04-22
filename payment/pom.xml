@@ -55,8 +55,11 @@
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-			<version>1.4.0.RELEASE</version>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-rest</artifactId>
+			</dependency>
 	</dependencies>
 
 	<build>
@@ -69,4 +72,15 @@
 	</build>
 
 
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>
+					spring-cloud-starter-netflix-eureka-client
+				</artifactId>
+				<version>1.4.0.RELEASE</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 </project>
