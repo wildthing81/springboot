@@ -1,4 +1,4 @@
-package com.forum.authentication;
+package com.ram.microservice.security.authentication;
 
 import javax.sql.DataSource;
 
@@ -6,17 +6,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.encoding.PlaintextPasswordEncoder;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
+import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 @Configuration
-@EnableWebMvcSecurity
-public class UCFSecurityConfig extends WebSecurityConfigurerAdapter{
+@EnableWebSecurity
+//@Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
+public class UCFAuthenticationConfig extends WebSecurityConfigurerAdapter{
 	
 	@Autowired
 	@Qualifier("epUser")
@@ -25,27 +31,18 @@ public class UCFSecurityConfig extends WebSecurityConfigurerAdapter{
 	@Autowired
 	private AuthenticationSuccessHandler successHandler;
 	
-	
 	@Override
-    protected void configure(AuthenticationManagerBuilder authManagerBuilder) 
-    												throws Exception 
-    {
-         
+	protected void configure(AuthenticationManagerBuilder authManagerBuilder) 
+			throws Exception 
+	{
+
 		authManagerBuilder.userDetailsService(userDetailsService)
-													.passwordEncoder(encoder());
-		
-		/*authManagerBuilder.jdbcAuthentication().dataSource(epDataSource)
-                .passwordEncoder(new BCryptPasswordEncoder());*/
-         
-         	//	.usersByUsernameQuery("select user_name,password from ep_user where user_name=?" +
-         	//			"and password=?");
-         		//.authoritiesByUsernameQuery("select username, role from user_roles where username=?");
-         		
-    }
-	
+											.passwordEncoder(userPasswordEncoder());
+
+	}	
 	
 	@Override
-    protected void configure(HttpSecurity http) throws Exception {
+	public void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
                 //.antMatchers("/rest/**").authenticated()
@@ -67,8 +64,7 @@ public class UCFSecurityConfig extends WebSecurityConfigurerAdapter{
     }
 	
 	@Bean
-    public PlaintextPasswordEncoder encoder() {
-        //return new BCryptPasswordEncoder(); /* will encode passwords on registration*/
-		return new PlaintextPasswordEncoder();
-    }
+    public PasswordEncoder userPasswordEncoder() {
+        return new BCryptPasswordEncoder(8);
+	}
 }
