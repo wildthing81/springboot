@@ -2,8 +2,13 @@ package com.ram.microservice.payment.domain;
 
 import java.time.LocalDateTime;
 
+import javax.validation.constraints.FutureOrPresent;
+import javax.validation.constraints.NotNull;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.format.annotation.NumberFormat;
+import org.springframework.format.annotation.NumberFormat.Style;
 
 @Document(collection="payment")
 public class Payment {
@@ -11,11 +16,22 @@ public class Payment {
 	@Id
 	private String paymentId;
 	
+	@NotNull
 	private String userId;
+	
+	@NotNull
+	@NumberFormat(style = Style.CURRENCY)
 	private double amount;
+	
+	@NotNull
+	@NumberFormat(style = Style.NUMBER)
 	private long accountNo;
+	
+	@NotNull
+	@FutureOrPresent
 	private LocalDateTime pymntDateTime;
 	//bsb
+	@NotNull
 	private String bankCode;
 	private String desc;
 	public String getUserId() {

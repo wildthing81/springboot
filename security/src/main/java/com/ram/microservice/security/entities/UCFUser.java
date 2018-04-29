@@ -1,6 +1,10 @@
 package com.ram.microservice.security.entities;
 
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -14,8 +18,10 @@ public class UCFUser {
 	@Id
 	private String userId;
 
+	@Size(min=8,message="Username should be minimum 8 characters")
+	@NotNull
 	private String username;
-
+	@NotNull
 	private String firstname;
 
 	private String lastname;
@@ -25,7 +31,9 @@ public class UCFUser {
 	private Boolean islocked;
 	
 	private String password;
-
+	
+	@NotNull
+	@Email
 	private String emailid;
 
 	private Integer role;
