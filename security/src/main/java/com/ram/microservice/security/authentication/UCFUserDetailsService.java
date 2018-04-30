@@ -11,11 +11,16 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.oauth2.provider.ClientDetails;
+import org.springframework.security.oauth2.provider.ClientDetailsService;
+import org.springframework.security.oauth2.provider.ClientRegistrationException;
 import org.springframework.stereotype.Service;
 
-import com.forum.authorization.RoleConstants;
-import com.forum.datalayer.UCFUserDao;
-import com.forum.entities.UCFUser;
+import com.ram.microservice.security.authorization.RoleConstants;
+import com.ram.microservice.security.dao.UCFUserDao;
+import com.ram.microservice.security.entities.UCFUser;
+
+
 
 @Service("epUser")
 public class UCFUserDetailsService implements UserDetailsService {

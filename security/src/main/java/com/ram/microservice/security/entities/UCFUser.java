@@ -8,6 +8,9 @@ import javax.validation.constraints.Size;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.fasterxml.jackson.annotation.JsonFilter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * @author asus
  * 
@@ -30,6 +33,7 @@ public class UCFUser {
 
 	private Boolean islocked;
 	
+	@JsonIgnore
 	private String password;
 	
 	@NotNull

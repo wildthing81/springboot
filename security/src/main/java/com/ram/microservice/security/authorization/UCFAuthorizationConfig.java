@@ -1,4 +1,4 @@
-package com.ram.microservice.security.authentication;
+package com.ram.microservice.security.authorization;
 
 import javax.sql.DataSource;
 
@@ -55,14 +55,17 @@ public class UCFAuthorizationConfig extends AuthorizationServerConfigurerAdapter
 
 	@Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
-        endpoints.tokenStore(tokenStore()).authenticationManager(authenticationManager).userDetailsService(userDetailsService);
+        endpoints.tokenStore(tokenStore());
+        endpoints.authenticationManager(authenticationManager);
+        //endpoints.
     }
 	
 	
 
 	@Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.jdbc(dataSource);
+        clients.jdbc(dataSource)
+        		.inMemory();
     }
 	
 	 
