@@ -3,6 +3,7 @@ package com.ram.microservice;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+//@ComponentScan("com.ram.microservice.security")
 @SpringBootApplication
 public class SecurityApplication {
 
