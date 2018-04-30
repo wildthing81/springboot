@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.forum.authentication;
+package com.ram.microservice.security.authentication;
 
 import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
 

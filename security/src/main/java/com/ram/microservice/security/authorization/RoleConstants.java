@@ -1,4 +1,4 @@
-package com.forum.authorization;
+package com.ram.microservice.security.authorization;
 
 public final class RoleConstants {
 	

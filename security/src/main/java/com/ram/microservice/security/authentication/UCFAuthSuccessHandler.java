@@ -1,11 +1,13 @@
-package com.forum.authentication;
+package com.ram.microservice.security.authentication;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Collection;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -17,9 +19,8 @@ import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
-import com.forum.entities.UCFUserSession;
-import com.forum.services.UserActivityService;
-import com.forum.utils.UCFConstants;
+import com.ram.microservice.security.entities.UCFUserSession;
+import com.ram.microservice.security.services.UserActivityService;
 
 @Component
 public class UCFAuthSuccessHandler implements AuthenticationSuccessHandler {
