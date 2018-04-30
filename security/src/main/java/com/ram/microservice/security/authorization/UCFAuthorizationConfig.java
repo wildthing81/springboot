@@ -23,7 +23,6 @@ import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 @Configuration
-@EnableWebSecurity
 @EnableAuthorizationServer
 public class UCFAuthorizationConfig extends AuthorizationServerConfigurerAdapter{
 	
@@ -49,6 +48,7 @@ public class UCFAuthorizationConfig extends AuthorizationServerConfigurerAdapter
 	
 	@Override
     public void configure(AuthorizationServerSecurityConfigurer oauthServer) {
+		oauthServer.allowFormAuthenticationForClients();
         oauthServer.tokenKeyAccess("permitAll()").checkTokenAccess("isAuthenticated()");
         //.passwordEncoder(oauthClientPasswordEncoder);
     }
@@ -64,8 +64,16 @@ public class UCFAuthorizationConfig extends AuthorizationServerConfigurerAdapter
 
 	@Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.jdbc(dataSource)
-        		.inMemory();
+        clients.inMemory()
+                //jdbc(dataSource)
+        		.withClient("clientapp")
+        		.authorizedGrantTypes("password", "refresh_token")
+        		.scopes("read", "trust")
+        		.resourceIds("resource-server-rest-api")
+        		.secret("123456")
+        		.accessTokenValiditySeconds(180)
+                .refreshTokenValiditySeconds(600)
+        		.autoApprove(true).and().build();
     }
 	
 	 

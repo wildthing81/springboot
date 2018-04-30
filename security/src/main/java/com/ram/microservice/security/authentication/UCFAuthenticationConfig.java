@@ -1,7 +1,5 @@
 package com.ram.microservice.security.authentication;
 
-import javax.sql.DataSource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
@@ -17,17 +15,13 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
-import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
-import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
-import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
 //@Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
 @Order(1)
-@EnableOAuth2Sso
+//@EnableOAuth2Sso
 public class UCFAuthenticationConfig extends WebSecurityConfigurerAdapter{
 	
 	@Autowired
@@ -49,11 +43,10 @@ public class UCFAuthenticationConfig extends WebSecurityConfigurerAdapter{
 	
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
-        http.requestMatchers()
-            .antMatchers("/login", "/oauth/authorize", "/oauth/confirm_access")
-            .and()
+        http
             .authorizeRequests()
-                //.antMatchers("/rest/**").authenticated()
+                .antMatchers("/login", "/oauth/authorize", "/oauth/confirm_access").permitAll()
+                .antMatchers("/logout").hasRole("USER")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
