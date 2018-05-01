@@ -1,21 +1,20 @@
 package com.ram.microservice.security.dao;
 
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ram.microservice.security.entities.UCFUser;
 
 
 @Repository
-//@Transactional
+@Transactional
 public class UCFUserDao{
 
-	/*@Autowired
-	private SessionFactory sessionFactory;*/
 	@Autowired
+	private SessionFactory sessionFactory;
+	/*@Autowired
 	private MongoTemplate mongoTemplate;
 	
 	public UCFUser findUserByName(String userName)
@@ -32,10 +31,10 @@ public class UCFUserDao{
 		query.addCriteria(Criteria.where("id").is(userId));
 	
 		return (UCFUser) mongoTemplate.find(query,UCFUser.class);  	
-    }
+    }*/
 	
 	public void saveUCFUser(UCFUser ufcUser)
     {
-		mongoTemplate.save(ufcUser);
+		sessionFactory.getCurrentSession().save(ufcUser);
     }
 }
