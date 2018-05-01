@@ -1,53 +1,66 @@
 package com.ram.microservice.security.entities;
 
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
-import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * @author asus
  * 
  */
-@Document(collection="user")
+@Entity
+@Table(name="ucf_user")
 public class UCFUser {
 
 	@Id
+	@Column(name="user_id")
 	private String userId;
 
 	@Size(min=8,message="Username should be minimum 8 characters")
 	@NotNull
-	private String username;
+	@Column(name="user_name")
+	private String userName;
+	
 	@NotNull
-	private String firstname;
+	@Column(name="first_name")
+	private String firstName;
 
-	private String lastname;
+	@Column(name="last_name")
+	private String lastName;
 
-	private boolean isadmin;
+	@Column(name="is_admin")
+	private boolean isAdmin;
 
-	private Boolean islocked;
+	@Column(name="is_locked")
+	private Boolean isLocked;
 	
 	@JsonIgnore
+	@Column(name="password")
 	private String password;
 	
 	@NotNull
 	@Email
-	private String emailid;
+	@Column(name="email_id")
+	private String emailId;
 
+	@NotNull
+	@Column(name="role")
 	private Integer role;
 
 	public UCFUser(String userName, String firstName, String lastName,
 			String password, boolean isAdmin, Integer role) {
-		this.username = userName;
-		this.firstname = firstName;
-		this.lastname = lastName;
-		this.isadmin = isAdmin;
+		this.userName = userName;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.isAdmin = isAdmin;
 		this.password = password;
 		this.role = role;
 	}
@@ -57,43 +70,43 @@ public class UCFUser {
 	}
 
 	public String getUsername() {
-		return username;
+		return userName;
 	}
 
 	public void setUsername(String username) {
-		this.username = username;
+		this.userName = username;
 	}
 
 	public String getFirstname() {
-		return firstname;
+		return firstName;
 	}
 
 	public void setFirstname(String firstname) {
-		this.firstname = firstname;
+		this.firstName = firstname;
 	}
 
 	public String getLastname() {
-		return lastname;
+		return lastName;
 	}
 
 	public void setLastname(String lastname) {
-		this.lastname = lastname;
+		this.lastName = lastname;
 	}
 
 	public boolean isIsadmin() {
-		return isadmin;
+		return isAdmin;
 	}
 
 	public void setIsadmin(boolean isadmin) {
-		this.isadmin = isadmin;
+		this.isAdmin = isadmin;
 	}
 
 	public Boolean getIsLocked() {
-		return islocked;
+		return isLocked;
 	}
 
 	public void setIsLocked(Boolean isLocked) {
-		this.islocked = isLocked;
+		this.isLocked = isLocked;
 	}
 
 	public String getPassword() {
@@ -105,11 +118,11 @@ public class UCFUser {
 	}
 
 	public String getEmailid() {
-		return emailid;
+		return emailId;
 	}
 
 	public void setEmailid(String emailid) {
-		this.emailid = emailid;
+		this.emailId = emailid;
 	}
 
 	public Integer getRole() {

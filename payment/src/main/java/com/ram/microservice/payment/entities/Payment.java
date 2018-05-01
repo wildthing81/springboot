@@ -1,4 +1,4 @@
-package com.ram.microservice.payment.domain;
+package com.ram.microservice.payment.entities;
 
 import java.time.LocalDateTime;
 

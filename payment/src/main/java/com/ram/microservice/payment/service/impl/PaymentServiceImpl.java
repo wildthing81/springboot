@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ram.microservice.payment.configuration.PaymentConfiguration;
-import com.ram.microservice.payment.domain.Payment;
+import com.ram.microservice.payment.entities.Payment;
 import com.ram.microservice.payment.service.PaymentService;
 
 @Service
