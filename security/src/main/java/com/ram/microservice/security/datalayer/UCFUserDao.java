@@ -1,4 +1,4 @@
-package com.ram.microservice.security.dao;
+package com.ram.microservice.security.datalayer;
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
