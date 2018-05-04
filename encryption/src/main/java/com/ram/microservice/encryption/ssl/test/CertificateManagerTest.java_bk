@@ -1,0 +1,65 @@
+/**
+ * 
+ */
+package com.examprep.security.test;
+
+import java.security.cert.Certificate;
+
+import com.examprep.security.X509CertificateManager;
+
+/**
+ * @author asus
+ *
+ */
+public class CertificateManagerTest {
+
+	/**
+	 * @throws java.lang.Exception
+	 */
+	X509CertificateManager x509CertificateManager = null;
+	@BeforeClass
+	public static void setUpBeforeClass() throws Exception {
+	}
+
+	/**
+	 * @throws java.lang.Exception
+	 */
+	@AfterClass
+	public static void tearDownAfterClass() throws Exception {
+	}
+
+	/**
+	 * @throws java.lang.Exception
+	 */
+	@Before
+	public void setUp() throws Exception {
+		x509CertificateManager = new X509CertificateManager();
+		
+	}
+
+	/**
+	 * @throws java.lang.Exception
+	 */
+	@After
+	public void tearDown() throws Exception {
+	}
+
+	/**
+	 * Test method for {@link com.mwas.security.X509CertificateManager#generateCertificate(java.lang.String, int, java.lang.String, java.lang.String)}.
+	 */
+	@Test
+	public final void testGenerateCertificate() {
+		String host="localhost";
+		int days=365;
+		String certname="testcertificate";
+		String sigalg="RSA";
+		
+		Certificate x509TestCertificate = x509CertificateManager.generateCertificate(host, days, certname, sigalg);
+		assertNotNull("X509 certificate generated successfully", x509TestCertificate);
+		
+		fail("Not yet implemented"); // TODO
+		
+		
+	}
+
+}
