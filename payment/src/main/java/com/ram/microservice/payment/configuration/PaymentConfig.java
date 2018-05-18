@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @ConfigurationProperties("payment-service")
-public class PaymentConfiguration {
+public class PaymentConfig {
 
 	
 }

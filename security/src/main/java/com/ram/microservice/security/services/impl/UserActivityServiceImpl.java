@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ram.microservice.security.dao.UserActivityDao;
+import com.ram.microservice.security.datalayer.UserActivityDao;
 import com.ram.microservice.security.entities.UCFUserActivity;
 import com.ram.microservice.security.services.UserActivityService;
 import com.ram.microservice.security.utils.UCFConstants;

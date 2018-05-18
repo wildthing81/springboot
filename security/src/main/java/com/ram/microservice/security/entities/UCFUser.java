@@ -55,10 +55,10 @@ public class UCFUser {
 
 	@NotNull
 	@Column(name="role")
-	private String role;
+	private Integer role;
 
 	public UCFUser(String userName, String firstName, String lastName,
-			String password, boolean isAdmin, String role) {
+			String password, boolean isAdmin, Integer role) {
 		this.userName = userName;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -127,11 +127,11 @@ public class UCFUser {
 		this.emailId = emailid;
 	}
 
-	public String getRole() {
+	public Integer getRole() {
 		return role;
 	}
 
-	public void setRole(String role) {
+	public void setRole(Integer role) {
 		this.role = role;
 	}
 
